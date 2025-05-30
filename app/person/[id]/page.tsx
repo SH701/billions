@@ -1,6 +1,10 @@
 import Btn from "@/components/btn";
 import Image from "next/image"
 
+interface Props{
+    params:{id:string;}
+}
+
 interface FinancialAsset {
     exchange:string;
     companyName:string; 
@@ -34,7 +38,7 @@ async function getPeopleDetail(id:string):Promise<Person>{
     return data;
 }
 
-export default async function PersonDetail({params}:{params:{id:string}}){
+export default async function PersonDetail({params}:Props){
     const {id} = params;
     const detail = await getPeopleDetail(id);
     return(
