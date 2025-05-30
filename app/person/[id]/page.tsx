@@ -35,7 +35,7 @@ async function getPeopleDetail(id:string):Promise<Person>{
 }
 
 export default async function PersonDetail({params}:{params:{id:string}}){
-    const {id} = await params;
+    const {id} = params;
     const detail = await getPeopleDetail(id);
     return(
         <div>
