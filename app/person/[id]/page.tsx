@@ -1,7 +1,8 @@
 import Btn from "@/components/btn";
+import { Metadata } from "next";
 import Image from "next/image"
 
-interface Props{
+type Props={
     params:{id:string;}
 }
 
@@ -22,6 +23,12 @@ interface Person {
   industries: string[];
   financialAssets:FinancialAsset[];
   bio:string;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  return {
+    title: `${params.id.toUpperCase()} Detail`
+  };
 }
 
 async function getPeopleDetail(id:string):Promise<Person>{
