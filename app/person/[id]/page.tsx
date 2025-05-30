@@ -1,9 +1,11 @@
 import Btn from "@/components/btn";
 import { Metadata } from "next";
 import Image from "next/image"
+import { ParsedUrlQuery } from "querystring";
 
-type Props={
-    params:{id:string;}
+interface Props {
+  params: { id: string };
+  searchParams: ParsedUrlQuery;  
 }
 
 interface FinancialAsset {
@@ -45,7 +47,7 @@ async function getPeopleDetail(id:string):Promise<Person>{
     return data;
 }
 
-export default async function PersonDetail({params}:Props){
+export default async function PersonDetail({params,searchParams :_}:Props){
     const {id} = params;
     const detail = await getPeopleDetail(id);
     return(
