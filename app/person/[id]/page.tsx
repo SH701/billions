@@ -4,8 +4,8 @@ import Image from "next/image"
 import { ParsedUrlQuery } from "querystring";
 
 interface Props {
-  params: { id: string };
-  searchParams: ParsedUrlQuery;  
+  params: Promise<{ id: string }>;
+  searchParams: Promise<ParsedUrlQuery>;
 }
 
 interface FinancialAsset {
@@ -28,8 +28,9 @@ interface Person {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const id = await params;
   return {
-    title: `${params.id.toUpperCase()} Detail`
+    title: `${id} Detail`
   };
 }
 
@@ -47,8 +48,9 @@ async function getPeopleDetail(id:string):Promise<Person>{
     return data;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function PersonDetail({params,searchParams :_}:Props){
-    const {id} = params;
+    const {id} = await params;
     const detail = await getPeopleDetail(id);
     return(
         <div>
